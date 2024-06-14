@@ -117,6 +117,9 @@ document.getElementById("appointmentForm").addEventListener("submit", function(e
     var confirmationMessage = "Your appointment is booked on " + datetime;
     alert(confirmationMessage); // For demo purposes, replace with actual emailing code
     
+    // Notify the server to send an email
+    notifyEmailServer(name, email, datetime);
+    
     // Reset the form after booking
     document.getElementById("appointmentForm").reset();
   } else {
@@ -124,15 +127,29 @@ document.getElementById("appointmentForm").addEventListener("submit", function(e
     alert("Please enter a valid email address.");
   }
 });
+
+function notifyEmailServer(name, email, datetime) {
+  // Example of making an HTTP request to notify the server
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "/sendEmail", true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+      console.log("Email notification sent successfully.");
+    }
+  };
+  var data = JSON.stringify({
+    name: name,
+    email: email,
+    datetime: datetime,
+    notifyEmail: "trc.therapy.for.kids@gmail.com" // Email to notify
+  });
+  xhr.send(data);
+}
 </script>
 
 </body>
 </html>
-
-
-</html>
-
-
 
 
 
