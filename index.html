@@ -109,12 +109,13 @@ document.getElementById("appointmentForm").addEventListener("submit", function(e
   
   var name = document.getElementById("name").value;
   var email = document.getElementById("email").value;
-  var datetime = document.getElementById("datetime").value;
+  var date = document.getElementById("date").value;
+  var time = document.getElementById("time").value;
   
   // Check if the email is valid
   if (/^\S+@\S+\.\S+$/.test(email)) {
     // Email is valid, send confirmation email
-    var confirmationMessage = "Your appointment is booked on " + datetime;
+    var confirmationMessage = "Your appointment is booked on " + date & time;
     alert(confirmationMessage); // For demo purposes, replace with actual emailing code
     
     // Notify the server to send an email
@@ -150,6 +151,3 @@ function notifyEmailServer(name, email, datetime) {
 
 </body>
 </html>
-
-
-
