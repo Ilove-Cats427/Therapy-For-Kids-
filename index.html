@@ -82,15 +82,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book Appointment</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Appointment</title>
 </head>
 <body>
 
-<h2>Book Appointment</h2>
+<h2>Book an Appointment</h2>
 
-<form id="appointmentForm">
+<form id="appointmentForm" action="/bookAppointment" method="POST">
   <label for="name">Name:</label><br>
   <input type="text" id="name" name="name" required><br><br>
   
@@ -103,51 +103,6 @@
   <button type="submit">Book Appointment</button>
 </form>
 
-<script>
-document.getElementById("appointmentForm").addEventListener("submit", function(event) {
-  event.preventDefault();
-  
-  var name = document.getElementById("name").value;
-  var email = document.getElementById("email").value;
-  var date = document.getElementById("date").value;
-  var time = document.getElementById("time").value;
-  
-  // Check if the email is valid
-  if (/^\S+@\S+\.\S+$/.test(email)) {
-    // Email is valid, send confirmation email
-    var confirmationMessage = "Your appointment is booked on " + date & time;
-    alert(confirmationMessage); // For demo purposes, replace with actual emailing code
-    
-    // Notify the server to send an email
-    notifyEmailServer(name, email, datetime);
-    
-    // Reset the form after booking
-    document.getElementById("appointmentForm").reset();
-  } else {
-    // Email is not valid
-    alert("Please enter a valid email address.");
-  }
-});
-
-function notifyEmailServer(name, email, datetime) {
-  // Example of making an HTTP request to notify the server
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "/sendEmail", true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-      console.log("Email notification sent successfully.");
-    }
-  };
-  var data = JSON.stringify({
-    name: name,
-    email: email,
-    datetime: datetime,
-    notifyEmail: "trc.therapy.for.kids@gmail.com" // Email to notify
-  });
-  xhr.send(data);
-}
-</script>
-
 </body>
 </html>
+
